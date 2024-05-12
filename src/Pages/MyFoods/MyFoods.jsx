@@ -61,10 +61,15 @@ const MyFoods = () => {
     
   return (
     <div className="flex flex-col items-center justify-center gap-5">
+
       <h1 className="my-10 gro text-3xl font-semibold">Manage My Foods</h1>
+
       <div className="w-full mb-20">
+
         <Card className="h-full w-full overflow-scroll md:overflow-hidden lg:overflow-hidden">
+          
           <table className="w-full min-w-max table-auto text-left">
+
             <thead>
               <tr>
                 {TABLE_HEAD.map((head) => (
@@ -83,6 +88,7 @@ const MyFoods = () => {
                 ))}
               </tr>
             </thead>
+
             <tbody>
               {myFoods.map((card, index) => (
                 <tr key={index} className="even:bg-blue-gray-50/50">
@@ -123,9 +129,13 @@ const MyFoods = () => {
                 </tr>
               ))}
             </tbody>
+
           </table>
+
         </Card>
+
       </div>
+
     </div>
   );
 };
