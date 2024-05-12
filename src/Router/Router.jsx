@@ -9,6 +9,9 @@ import AvailableFoods from "../Pages/AvailableFoods/AvailableFoods";
 import FoodRequest from "../Pages/FoodRequest/FoodRequest";
 import Login from "../Pages/Login/Login";
 import Register from "../Pages/Register/Register";
+import CardDetails from "../Pages/CardDetails/CardDetails";
+import PrivateFile from "../Private/PrivateFile";
+import Update from "../Pages/Update/Update";
 
 const router = createBrowserRouter([
     {
@@ -22,11 +25,11 @@ const router = createBrowserRouter([
             },
             {
                 path : '/addFood' ,
-                element : <AddFood/> ,
+                element : <PrivateFile><AddFood/></PrivateFile> ,
             },
             {
-                path : '/myFoods' ,
-                element : <MyFoods/> ,
+                path : '/manageMyFoods' ,
+                element : <PrivateFile><MyFoods/></PrivateFile> ,
             },
             {
                 path : '/availableFoods' ,
@@ -34,7 +37,7 @@ const router = createBrowserRouter([
             },
             {
                 path : '/myFoodRequest' ,
-                element : <FoodRequest/> ,
+                element : <PrivateFile><FoodRequest/></PrivateFile> ,
             },
             {
                 path : '/login' ,
@@ -43,6 +46,14 @@ const router = createBrowserRouter([
             {
                 path : '/Register' ,
                 element : <Register/> ,
+            },
+            {
+                path : '/featuredFoods/:id' ,
+                element : <PrivateFile><CardDetails/></PrivateFile> ,
+            },
+            {
+                path : '/update/:id' ,
+                element : <PrivateFile><Update/></PrivateFile> ,
             },
         ]
     }

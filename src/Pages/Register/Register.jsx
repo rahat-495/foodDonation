@@ -73,7 +73,7 @@ import UseAuth from "../../Hooks/UseAuth";
       setPassInt(e.target.value) ;
     }
 
-    if(user) return navigate('/') ;
+    // if(user) return navigate('/') ;
   
     return (
       <div className={`min-h-screen my-20 flex flex-col items-center justify-center`}>

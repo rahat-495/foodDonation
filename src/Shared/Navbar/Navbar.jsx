@@ -12,7 +12,7 @@ import UseAuth from "../../Hooks/UseAuth";
 
 const Nav = () => {
 
-  const {user , logOut , loading} = UseAuth() ;
+  const {user , logOut} = UseAuth() ;
   const [openNav, setOpenNav] = useState(false);
 
   useEffect(() => {
@@ -57,23 +57,23 @@ const Nav = () => {
         color="blue-gray"
         className="p-1 font-normal gro"
       >
-        <NavLink to={'/myFoods'} className={({ isActive, isPending }) =>
+        <NavLink to={'/availableFoods'} className={({ isActive, isPending }) =>
             isPending ? "pending" : isActive ? "font-bold underline" : ""
         }>
-          My Foods 
+          Available Foods
         </NavLink>
       </Typography>
-
+ 
       <Typography
         as="li"
         variant="paragraph"
         color="blue-gray"
         className="p-1 font-normal gro"
       >
-        <NavLink to={'/availableFoods'} className={({ isActive, isPending }) =>
+        <NavLink to={'/manageMyFoods'} className={({ isActive, isPending }) =>
             isPending ? "pending" : isActive ? "font-bold underline" : ""
         }>
-          Available Foods
+          Manage My Foods
         </NavLink>
       </Typography>
 
@@ -95,10 +95,6 @@ const Nav = () => {
 
   const handlelogOut = () => {
     logOut() ;
-  }
-
-  if(loading){
-    return <span className="loading min-h-[100vh] mx-auto min-w-[20%] flex items-center justify-center loading-infinity loading-lg"></span>
   }
 
   return (
