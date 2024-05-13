@@ -34,18 +34,21 @@ const FeaturedFood = () => {
 
                       <p className="gro text-black ">{food.additionalNotes}</p>
 
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center justify-between gap-3">
 
-                        <div className="badge badge-outline">
+                        <div className="badge badge-outline px-6">
                             <p className="gro font-semibold">Quantity : {food.foodQuantity}</p>
                         </div>
 
-                        <div className="badge badge-outline">
+                        <div className="badge badge-outline px-6">
                             <p className="gro font-semibold">Expired : {food.expiredDateTime}</p>
                         </div>
 
                       </div>
 
+                        <div className="badge badge-outline w-full px-6">
+                            <p className="gro font-semibold text-center">Pickup : {food.pickupLocation}</p>
+                        </div>
 
                       <div className="card-actions w-full">
                         <Link className="w-full" to={`/featuredFoods/${food._id}`}>
