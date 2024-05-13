@@ -3,6 +3,7 @@ import { Input } from "@material-tailwind/react";
 import UseAuth from "../../Hooks/UseAuth";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 const AddFood = () => {
 
@@ -17,7 +18,7 @@ const AddFood = () => {
         const donatorName = form.donarName.value ;
         const donatorEmail = form.donarEmail.value ;
         const donatorImage = form.donarImage.value ;
-        const foodQuantity = form.quantity.value ;
+        const foodQuantity = parseInt(form.quantity.value) ;
         const pickupLocation = form.location.value ;
         const expiredDateTime = form.expire.value ;
         const additionalNotes = form.notes.value ;
@@ -50,6 +51,12 @@ const AddFood = () => {
 
     return (
         <div className="min-h-[70vh] flex items-center flex-col justify-center mx-3">
+
+            <Helmet>
+                <title>
+                Feast Forward || Add Food
+                </title>
+            </Helmet>
 
             <h1 className="gro text-3xl font-semibold mb-10">Add Foods</h1>
 

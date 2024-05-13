@@ -5,6 +5,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import UseAuth from "../../Hooks/UseAuth";
 import { ToastContainer, toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 const CardDetails = () => {
 
@@ -42,26 +43,42 @@ const CardDetails = () => {
                 .then(res => {
                     console.log(res.data);
                     if(res.data.modifiedCount > 0){
-                        toast.success("Requested SuccessFully !")
+                        toast.success("Requested SuccessFully !") ;
+                        const modal = document.getElementById('my_modal_2');
+                        modal.close() ;
+                        
                     }
                     else{
-                        toast.warning("Already Have Requested !")
+                        toast.warning("Already Have Requested !") ;
+                        const modal = document.getElementById('my_modal_2');
+                        modal.close() ;
                     }
                 })
             }
             else{
-                toast.warning("Email Isn't valid")
+                toast.warning("You Can't Request Your Won Donation")
+                const modal = document.getElementById('my_modal_2');
+                modal.close() ;
             }
 
         }
         else{
-            toast.warning("Already Have Requested !")
+            toast.warning("Already Have Requested !") ;
+            const modal = document.getElementById('my_modal_2');
+            modal.close() ;
         }
 
     }
 
     return (
         <div className="min-h-[50vh] flex mx-10 items-start justify-center flex-col xl:flex-row xl:my-20  xl:mx-0 gap-10">
+
+            <Helmet>
+                <title>
+                Feast Forward || Details Page
+                </title>
+            </Helmet>
+
             <img className="w-full xl:w-1/2 rounded-lg h-[500px]" src={singleData.foodImage} alt="" />
             <div className="w-1/2">
                 <div className="flex items-center gap-3">

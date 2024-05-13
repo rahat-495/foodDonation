@@ -5,6 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import UseAuth from "../../Hooks/UseAuth";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const Update = () => {
 
@@ -30,7 +31,7 @@ const Update = () => {
         const donatorName = form.donarName.value ;
         const donatorEmail = form.donarEmail.value ;
         const donatorImage = form.donarImage.value ;
-        const foodQuantity = form.quantity.value ;
+        const foodQuantity = parseInt(form.quantity.value) ;
         const pickupLocation = form.location.value ;
         const expiredDateTime = form.expire.value ;
         const additionalNotes = form.notes.value ;
@@ -65,7 +66,15 @@ const Update = () => {
     }    
 
     return (
-        <div className="min-h-screen flex items-center justify-center mx-3">
+        <div className="min-h-[70vh] flex items-center justify-center flex-col mx-3">
+
+            <Helmet>
+                <title>
+                Feast Forward || Update
+                </title>
+            </Helmet>
+
+            <h1 className="gro text-4xl font-semibold mb-14">Update</h1>
 
             <form onSubmit={handleSubmit} className="w-full flex flex-col gap-5">
 

@@ -8,6 +8,7 @@ import { MdDelete } from "react-icons/md";
 import { Link } from "react-router-dom";
 import Swal from 'sweetalert2'
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet-async";
 
 const MyFoods = () => {
 
@@ -61,6 +62,12 @@ const MyFoods = () => {
     
   return (
     <div className="flex flex-col items-center justify-center gap-5">
+
+      <Helmet>
+        <title>
+          Feast Forward || Manage My Foods
+        </title>
+      </Helmet>
 
       <h1 className="my-10 gro text-3xl font-semibold">Manage My Foods</h1>
 

@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { GrPowerReset } from "react-icons/gr";
+import { Helmet } from "react-helmet-async";
 
 const AvailableFoods = () => {
   
@@ -26,10 +27,18 @@ const AvailableFoods = () => {
   return (
     <div className="w-full min-h-screen flex-col flex items-center justify-center mb-10">
       
-      <div className="grid grid-cols-3 gap-5 h-6">
+      <Helmet>
+        <title>
+          Feast Forward || Available Foods
+        </title>
+      </Helmet>
 
-        <div className="bg-[#232323] mt-1 px-5 py-2 flex items-center justify-center rounded-md cursor-pointer text-white">
-          <select onChange={(e) => setSort(e.target.value)} className="bg-[#232323] rounded-md cursor-pointer text-white" name="sort" id="">
+      <h1 className="gro font-semibold text-3xl my-10">Available Foods</h1>
+
+      <div className="flex items-center justify-center gap-5 h-10 mb-20">
+
+        <div className="">
+          <select onChange={(e) => setSort(e.target.value)} className="bg-[#232323] px-5 py-[9px] flex items-center justify-center rounded-md cursor-pointer text-white" name="sort" id="">
             <option value="">Sort By Expire Date</option>
             <option value="asc">Ascending Order</option>
             <option value="dsc">Descending Order</option>
@@ -54,12 +63,11 @@ const AvailableFoods = () => {
         </div>
 
         <div className="mt-1">
-          <Button onClick={() => (setSort('') , setSearch(''))} className="flex items-center gap-3 py-3">Reset <GrPowerReset className="text-lg"/></Button>
+          <Button onClick={() => (setSort('') , setSearch(''))} className="flex items-center gap-3 py-3 hover:shadow-none">Reset <GrPowerReset className="text-lg"/></Button>
         </div>
 
       </div>
 
-      <h1 className="gro font-semibold text-3xl my-10">Available Foods Page</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-5 w-full">
         {availableFoods.map((food) => (
           <div key={food._id} className="card border mx-5">

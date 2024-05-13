@@ -105,9 +105,10 @@ const Nav = () => {
         <div className="flex items-center justify-between text-blue-gray-900">
 
           <Typography
-            className="mr-4 text-2xl cursor-pointer py-1.5 font-medium"
+            className="mr-4 text-2xl flex items-center gap-4 cursor-pointer py-1.5 font-semibold"
           >
-            Material Tailwind
+            <img className="w-20 h-20 rounded-full p-1 border" src="https://img.freepik.com/premium-vector/fresh-food-logo-food-share-logo-design-template_664675-595.jpg" alt="" />
+            Feast Forward
           </Typography>
 
           <div className="flex items-center gap-4">
