@@ -46,7 +46,6 @@ const CardDetails = () => {
                         toast.success("Requested SuccessFully !") ;
                         const modal = document.getElementById('my_modal_2');
                         modal.close() ;
-                        
                     }
                     else{
                         toast.warning("Already Have Requested !") ;

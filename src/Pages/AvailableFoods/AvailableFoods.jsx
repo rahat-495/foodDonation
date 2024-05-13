@@ -11,6 +11,7 @@ const AvailableFoods = () => {
   const [availableFoods , setAvailableFoods] = useState([]) ;
   const [sort , setSort] = useState('') ;
   const [search , setSearch] = useState('') ;
+  const [layout , setLayout] = useState(false) ;
   
   useEffect(() => {
     axios.get(`http://localhost:5555/availbleFoods?sort=${sort}&search=${search}`)
@@ -36,6 +37,8 @@ const AvailableFoods = () => {
       <h1 className="gro font-semibold text-3xl my-10">Available Foods</h1>
 
       <div className="flex items-center justify-center gap-5 h-10 mb-20">
+
+        <Button onClick={() => setLayout(!layout)} className="py-[11px] hover:shadow-none">Change Layout</Button>
 
         <div className="">
           <select onChange={(e) => setSort(e.target.value)} className="bg-[#232323] px-5 py-[9px] flex items-center justify-center rounded-md cursor-pointer text-white" name="sort" id="">
@@ -68,7 +71,7 @@ const AvailableFoods = () => {
 
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-5 w-full">
+      <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:${layout ? 'grid-cols-3' : 'grid-cols-2'} gap-5 ${layout ? 'w-full' : 'w-2/3'}`}>
         {availableFoods.map((food) => (
           <div key={food._id} className="card border mx-5">
             <div className="card-body p-6">
