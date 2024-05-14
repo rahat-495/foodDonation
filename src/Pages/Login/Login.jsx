@@ -17,10 +17,12 @@ import {
   import { ToastContainer, toast } from "react-toastify";
 import { FcGoogle } from "react-icons/fc";
 import UseAuth from "../../Hooks/UseAuth";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
   
   const Login = () => {
   
     const {signIn , googleLogin , githubLogin , user} = UseAuth() ;
+    const axiosSecure = useAxiosSecure() ;
   
     const location = useLocation() ;
     const navigate = useNavigate() ;
@@ -41,14 +43,20 @@ import UseAuth from "../../Hooks/UseAuth";
           console.log(result.user);
           form.reset() ;
           toast.success('Login Success Fully !') ;
-          setTimeout(() => {
-            if(location.state){
-              navigate(location.state) ;
-            }
-            else{
-              navigate('/') ;
-            }
-          }, 1000);
+
+          axiosSecure.post(`http://localhost:5555/jwt`, {email : result.user?.email})
+          .then(res => {
+            console.log(res.data);
+            setTimeout(() => {
+              if(location.state){
+                navigate(location.state) ;
+              }
+              else{
+                navigate('/') ;
+              }
+            }, 1000);
+          }) ;
+
         })
         .catch((error) => {
           console.log(error.message);
@@ -67,6 +75,12 @@ import UseAuth from "../../Hooks/UseAuth";
       .then((result) => {
         console.log(result.user);
         toast.success('Login Success Fully !') ;
+        
+        axiosSecure.post(`http://localhost:5555/jwt` , {email : result?.user?.email})
+        .then(res => {
+          console.log(res.data);
+        }) ;
+        
         setTimeout(() => {
           if(location.state){
             navigate(location.state) ;
@@ -86,6 +100,12 @@ import UseAuth from "../../Hooks/UseAuth";
       .then((result) => {
         console.log(result);
         toast.success('Login Success Fully !') ;
+        
+        axiosSecure.post(`http://localhost:5555/jwt` , {email : result?.user?.email})
+        .then(res => {
+          console.log(res.data);
+        }) ;
+        
         setTimeout(() => {
           if(location.state){
             navigate(location.state) ;

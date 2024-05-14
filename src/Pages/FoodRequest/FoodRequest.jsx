@@ -1,13 +1,14 @@
 
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import UseAuth from "../../Hooks/UseAuth";
 import { Card, Typography } from "@material-tailwind/react";
 import { Helmet } from "react-helmet-async";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const FoodRequest = () => {
 
     const {user} = UseAuth() ;
+    const axiosSecure = useAxiosSecure() ;
 
     const { data: myRequestedFoods } = useQuery({
         queryKey: ["myRequestedFoods" , user.email],
@@ -17,7 +18,7 @@ const FoodRequest = () => {
     });
     
     const getData = async () => {
-        const { data } = await axios.get(
+        const { data } = await axiosSecure.get(
             `http://localhost:5555/myRequestedFoods/${user?.email}`
         );
         return data;

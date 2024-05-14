@@ -1,6 +1,5 @@
 
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import UseAuth from "../../Hooks/UseAuth";
 import { Button, Card, Typography } from "@material-tailwind/react";
 import { CiEdit } from "react-icons/ci";
@@ -9,10 +8,12 @@ import { Link } from "react-router-dom";
 import Swal from 'sweetalert2'
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const MyFoods = () => {
 
     const { user } = UseAuth();
+    const axiosSecure = useAxiosSecure() ;
     
     const { data: myFoods , refetch } = useQuery({
         queryKey: ["myFoods" , user?.email],
@@ -22,7 +23,7 @@ const MyFoods = () => {
     });
     
     const getData = async () => {
-        const { data } = await axios.get(
+        const { data } = await axiosSecure.get(
             `http://localhost:5555/manageMyFoods/${user?.email}`
         );
         return data;
@@ -47,7 +48,7 @@ const MyFoods = () => {
             icon: "success"
           });
 
-          axios.delete(`http://localhost:5555/foodDelete/${id}`)
+          axiosSecure.delete(`http://localhost:5555/foodDelete/${id}`)
           .then(res => {
             console.log(res.data);
             if(res.data.deletedCount > 0){

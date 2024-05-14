@@ -1,10 +1,12 @@
 
 import { Button } from "@material-tailwind/react";
 import { useQuery } from "@tanstack/react-query";
-import axios from 'axios' ;
 import { Link } from "react-router-dom";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const FeaturedFood = () => {
+
+    const axiosSecure = useAxiosSecure() ;
 
     const {data : featuredFoods = []} = useQuery({
         queryKey:['featuredFoods'] , 
@@ -12,11 +14,9 @@ const FeaturedFood = () => {
     })
 
     const getData = async () => {
-        const {data} = await axios.get(`http://localhost:5555/featuredFoods`) ;
+        const {data} = await axiosSecure.get(`http://localhost:5555/featuredFoods`) ;
         return data ;
     }
-
-    console.log(featuredFoods);
 
     return (
         <div className="flex items-center justify-center flex-col gap-3 mx-5 lg:mx-0 xl:mx-0">

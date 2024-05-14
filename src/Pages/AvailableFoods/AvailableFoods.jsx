@@ -11,7 +11,7 @@ const AvailableFoods = () => {
   const [availableFoods , setAvailableFoods] = useState([]) ;
   const [sort , setSort] = useState('') ;
   const [search , setSearch] = useState('') ;
-  const [layout , setLayout] = useState(false) ;
+  const [layout , setLayout] = useState(true) ;
   
   useEffect(() => {
     axios.get(`http://localhost:5555/availbleFoods?sort=${sort}&search=${search}`)

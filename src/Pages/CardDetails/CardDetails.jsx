@@ -1,16 +1,17 @@
 
 import { Button, Input } from "@material-tailwind/react";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import UseAuth from "../../Hooks/UseAuth";
 import { ToastContainer, toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const CardDetails = () => {
 
     const {id} = useParams() ;
     const {user} = UseAuth() ;
+    const axiosSecure = useAxiosSecure() ;
 
     const date = new Date() ;
 
@@ -20,13 +21,30 @@ const CardDetails = () => {
     })
 
     const getData = async () => {
-        const {data} = await axios.get(`http://localhost:5555/featuredFoods/${id}`) ;
+        const {data} = await axiosSecure.get(`http://localhost:5555/featuredFoods/${id}`) ;
         return data ;
     }
 
-    console.log(singleData);
+    const {mutateAsync} = useMutation({
+        mutationFn : async (obj) => {
+            const {id , status , additional , email , requestedDate} = obj ;
+            axiosSecure.patch(`http://localhost:5555/foodsRequest/${id}` , {status , additional , email , requestedDate})
+                .then(res => {
+                    if(res.data.modifiedCount > 0){
+                        toast.success("Requested SuccessFully !") ;
+                        const modal = document.getElementById('my_modal_2');
+                        modal.close() ;
+                    }
+                    else{
+                        toast.warning("Already Have Requested !") ;
+                        const modal = document.getElementById('my_modal_2');
+                        modal.close() ;
+                    }
+                })
+        }
+    })
     
-    const handleRequest = (e , id) => {
+    const handleRequest = async (e , id) => {
         e.preventDefault() ;
         
         const form = e.target ;
@@ -39,20 +57,7 @@ const CardDetails = () => {
         if(singleData.status === 'available'){
 
             if(singleData.donator.donatorEmail !== formEmail){
-                axios.patch(`http://localhost:5555/foodsRequest/${id}` , {additional , status , email , requestedDate})
-                .then(res => {
-                    console.log(res.data);
-                    if(res.data.modifiedCount > 0){
-                        toast.success("Requested SuccessFully !") ;
-                        const modal = document.getElementById('my_modal_2');
-                        modal.close() ;
-                    }
-                    else{
-                        toast.warning("Already Have Requested !") ;
-                        const modal = document.getElementById('my_modal_2');
-                        modal.close() ;
-                    }
-                })
+                await mutateAsync({id , status , additional , email , requestedDate}) ;
             }
             else{
                 toast.warning("You Can't Request Your Won Donation")

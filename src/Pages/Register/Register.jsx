@@ -14,11 +14,12 @@ import {
   import 'react-toastify/dist/ReactToastify.css';
   import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 import UseAuth from "../../Hooks/UseAuth";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
   
   const Register = () => {
   
-    const {createUser , setProfile , user} = UseAuth() ;
-    
+    const {createUser , setProfile} = UseAuth() ;
+    const axiosSecure = useAxiosSecure() ;
     const navigate = useNavigate() ;
     const [remember , setRemember] = useState(false) ;
     const [errorText , setErrorText] = useState('') ;
@@ -43,6 +44,12 @@ import UseAuth from "../../Hooks/UseAuth";
               console.log(result.user);
               toast.success('Register Success Fully !') ;
               form.reset() ;
+              
+              axiosSecure.post(`http://localhost:5555/jwt` , {email : result.user.email})
+              .then(res => {
+                console.log(res.data);
+              }) ;
+              
               setTimeout(() => {
                 navigate('/')
               }, 1000);
@@ -72,8 +79,6 @@ import UseAuth from "../../Hooks/UseAuth";
     const handleChange = (e) => {
       setPassInt(e.target.value) ;
     }
-
-    // if(user) return navigate('/') ;
   
     return (
       <div className={`min-h-screen my-20 flex flex-col items-center justify-center`}>

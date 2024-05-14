@@ -3,9 +3,9 @@ import { Input } from "@material-tailwind/react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import UseAuth from "../../Hooks/UseAuth";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const Update = () => {
 
@@ -13,14 +13,15 @@ const Update = () => {
     const {user} = UseAuth() ;
     const [remaining , setRemaining] = useState({}) ;
     const navigate = useNavigate() ;
+    const axiosSecure = useAxiosSecure() ;
 
     useEffect(() => {
-        axios.get(`http://localhost:5555/remainingFoods/${id}`)
+        axiosSecure.get(`http://localhost:5555/remainingFoods/${id}`)
         .then(res => {
             console.log(res.data);
             setRemaining(res.data) ;
         })
-    } , [id])
+    } , [id , axiosSecure])
 
     const handleSubmit = (e) => {
         e.preventDefault() ;
@@ -52,7 +53,7 @@ const Update = () => {
             status ,
         } ;
         
-        axios.put(`http://localhost:5555/updateFood/${id}` , foodInfo)
+        axiosSecure.put(`http://localhost:5555/updateFood/${id}` , foodInfo)
         .then(res => {
             console.log(res.data);
             if(res.data.modifiedCount > 0){
