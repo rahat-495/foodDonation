@@ -9,7 +9,7 @@ const PrivateFile = ({children}) => {
     const location = useLocation() ;
 
     if(loading){
-        return <span className="loading min-h-[100vh] mx-auto min-w-[20%] flex items-center justify-center loading-infinity loading-lg"></span>
+        return <span className="loading min-h-[100vh] mx-auto min-w-[20%] flex items-center justify-center loading-ring loading-lg"></span>
     }
 
     if(user){

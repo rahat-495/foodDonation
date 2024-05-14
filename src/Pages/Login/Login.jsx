@@ -44,7 +44,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
           form.reset() ;
           toast.success('Login Success Fully !') ;
 
-          axiosSecure.post(`http://localhost:5555/jwt`, {email : result.user?.email})
+          axiosSecure.post(`/jwt`, {email : result.user?.email})
           .then(res => {
             console.log(res.data);
             setTimeout(() => {
@@ -76,7 +76,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
         console.log(result.user);
         toast.success('Login Success Fully !') ;
         
-        axiosSecure.post(`http://localhost:5555/jwt` , {email : result?.user?.email})
+        axiosSecure.post(`/jwt` , {email : result?.user?.email})
         .then(res => {
           console.log(res.data);
         }) ;
@@ -101,7 +101,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
         console.log(result);
         toast.success('Login Success Fully !') ;
         
-        axiosSecure.post(`http://localhost:5555/jwt` , {email : result?.user?.email})
+        axiosSecure.post(`/jwt` , {email : result?.user?.email})
         .then(res => {
           console.log(res.data);
         }) ;

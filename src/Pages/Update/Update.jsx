@@ -16,7 +16,7 @@ const Update = () => {
     const axiosSecure = useAxiosSecure() ;
 
     useEffect(() => {
-        axiosSecure.get(`http://localhost:5555/remainingFoods/${id}`)
+        axiosSecure.get(`/remainingFoods/${id}`)
         .then(res => {
             console.log(res.data);
             setRemaining(res.data) ;
@@ -53,7 +53,7 @@ const Update = () => {
             status ,
         } ;
         
-        axiosSecure.put(`http://localhost:5555/updateFood/${id}` , foodInfo)
+        axiosSecure.put(`/updateFood/${id}` , foodInfo)
         .then(res => {
             console.log(res.data);
             if(res.data.modifiedCount > 0){
@@ -97,7 +97,7 @@ const Update = () => {
                 <div className="grid grid-cols-2 gap-5">
                     <div className="border rounded-lg border-[#B0BEC5] flex items-center justify-between px-3">
                         <label htmlFor="status" className="gro">Status</label>
-                        <select name="status" id="">
+                        <select className="bg-transparent" name="status" id="">
                             <option defaultValue={remaining?.status} className="gro font-semibold" value="available">Available</option>
                             <option defaultValue={remaining?.status} className="gro" value="requested">Requested</option>
                         </select>

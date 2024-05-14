@@ -4,11 +4,13 @@ import UseAuth from "../../Hooks/UseAuth";
 import { Card, Typography } from "@material-tailwind/react";
 import { Helmet } from "react-helmet-async";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { useState } from "react";
 
 const FoodRequest = () => {
 
     const {user} = UseAuth() ;
     const axiosSecure = useAxiosSecure() ;
+    const [loading , setLoading] = useState(false) ;
 
     const { data: myRequestedFoods } = useQuery({
         queryKey: ["myRequestedFoods" , user.email],
@@ -18,13 +20,19 @@ const FoodRequest = () => {
     });
     
     const getData = async () => {
+        setLoading(true) ;
         const { data } = await axiosSecure.get(
-            `http://localhost:5555/myRequestedFoods/${user?.email}`
+          `/myRequestedFoods/${user?.email}`
         );
+        setLoading(false) ;
         return data;
     };
 
     const TABLE_HEAD = ["Donar Name", "Pickup Location" ,"Expire Date" , "Request Date"];
+
+    if(loading){
+      return <span className="loading min-h-[100vh] mx-auto min-w-[20%] flex items-center justify-center loading-ring loading-lg"></span> ;
+    }
 
     return (
         <div className="flex flex-col items-center justify-center gap-5">

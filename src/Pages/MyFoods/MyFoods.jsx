@@ -9,11 +9,13 @@ import Swal from 'sweetalert2'
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { useState } from "react";
 
 const MyFoods = () => {
 
     const { user } = UseAuth();
     const axiosSecure = useAxiosSecure() ;
+    const [loading , setLoading] = useState(false) ;
     
     const { data: myFoods , refetch } = useQuery({
         queryKey: ["myFoods" , user?.email],
@@ -23,9 +25,9 @@ const MyFoods = () => {
     });
     
     const getData = async () => {
-        const { data } = await axiosSecure.get(
-            `http://localhost:5555/manageMyFoods/${user?.email}`
-        );
+        setLoading(true) ;
+        const { data } = await axiosSecure.get(`/manageMyFoods/${user?.email}`);
+        setLoading(false) ;
         return data;
     };
 
@@ -48,7 +50,7 @@ const MyFoods = () => {
             icon: "success"
           });
 
-          axiosSecure.delete(`http://localhost:5555/foodDelete/${id}`)
+          axiosSecure.delete(`/foodDelete/${id}`)
           .then(res => {
             console.log(res.data);
             if(res.data.deletedCount > 0){
@@ -59,6 +61,10 @@ const MyFoods = () => {
 
         }
       });
+    }
+
+    if(loading){
+      return <span className="loading min-h-[100vh] mx-auto min-w-[20%] flex items-center justify-center loading-ring loading-lg"></span> ;
     }
     
   return (

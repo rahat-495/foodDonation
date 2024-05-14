@@ -12,7 +12,7 @@ const Volentiear = () => {
         className="min-h-[70vh] mx-3 flex flex-col text-5xl items-center lg:mx-0"
       >
         
-        <div className="grid bg-[#23232327] mb-20 p-12 rounded-lg gap-6 grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
+        <div className="grid bg-gray-200 mb-20 p-12 rounded-lg gap-6 grid-cols-1 md:grid-cols-3 lg:grid-cols-5">
           <div className="tooltip"
             data-tip="David">
             <img

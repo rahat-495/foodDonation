@@ -4,10 +4,28 @@ import UseAuth from "../../Hooks/UseAuth";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { Helmet } from "react-helmet-async";
+import { useEffect, useState } from "react";
 
 const AddFood = () => {
 
-    const {user} = UseAuth() ;
+    const {user , loading} = UseAuth() ;
+
+    const [data , setDate] = useState([]) ;
+    const [loading2 , setLoading] = useState(false) ;
+
+    useEffect(() => {
+        setLoading(true) ;
+        axios.get(`https://assignment11server-omega.vercel.app/featuredFoods`)
+        .then(res => {
+            setDate(res.data) ;
+            setLoading(false) ;
+        })
+    } , [])
+
+    if(loading || loading2){
+        console.log(data);
+        return <span className="loading min-h-[100vh] mx-auto min-w-[20%] flex items-center justify-center loading-ring loading-lg"></span> ;
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault() ;
@@ -39,7 +57,7 @@ const AddFood = () => {
             status ,
         } ;
         
-        axios.post(`http://localhost:5555/addFood` , foodInfo)
+        axios.post(`https://assignment11server-omega.vercel.app/addFood` , foodInfo)
         .then(res => {
             console.log(res.data);
             if(res.data.insertedId){
@@ -80,7 +98,7 @@ const AddFood = () => {
                 <div className="grid grid-cols-2 gap-5">
                     <div className="border rounded-lg border-[#B0BEC5] flex items-center justify-between px-3">
                         <label htmlFor="status" className="gro">Status</label>
-                        <select name="status" id="">
+                        <select className="bg-transparent" name="status" id="">
                             <option className="gro font-semibold" value="available">Available</option>
                         </select>
                     </div>

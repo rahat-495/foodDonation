@@ -45,7 +45,7 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
               toast.success('Register Success Fully !') ;
               form.reset() ;
               
-              axiosSecure.post(`http://localhost:5555/jwt` , {email : result.user.email})
+              axiosSecure.post(`/jwt` , {email : result.user.email})
               .then(res => {
                 console.log(res.data);
               }) ;

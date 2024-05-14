@@ -21,14 +21,14 @@ const CardDetails = () => {
     })
 
     const getData = async () => {
-        const {data} = await axiosSecure.get(`http://localhost:5555/featuredFoods/${id}`) ;
+        const {data} = await axiosSecure.get(`/featuredFoods/${id}`) ;
         return data ;
     }
 
     const {mutateAsync} = useMutation({
         mutationFn : async (obj) => {
             const {id , status , additional , email , requestedDate} = obj ;
-            axiosSecure.patch(`http://localhost:5555/foodsRequest/${id}` , {status , additional , email , requestedDate})
+            axiosSecure.patch(`/foodsRequest/${id}` , {status , additional , email , requestedDate})
                 .then(res => {
                     if(res.data.modifiedCount > 0){
                         toast.success("Requested SuccessFully !") ;
@@ -95,7 +95,7 @@ const CardDetails = () => {
                 <h1 className="gro mt-6 font-semibold text-xl">Expired Date : {singleData.expiredDateTime}</h1>
 
                 {/* Open the modal using document.getElementById('ID').showModal() method */}
-                <Button className="btn my-5" onClick={()=>document.getElementById('my_modal_2').showModal()}>Request</Button>
+                <Button className="btn my-5 border-white border" onClick={()=>document.getElementById('my_modal_2').showModal()}>Request</Button>
                 <dialog id="my_modal_2" className="modal">
                     <div className="modal-box">
                         <form onSubmit={(e) => handleRequest(e , singleData._id)} className="flex flex-col gap-5">
@@ -122,11 +122,11 @@ const CardDetails = () => {
 
                             <div className="grid grid-cols-2 gap-5">
                                 <Input label="Expire Date" readOnly defaultValue={singleData.expiredDateTime}></Input>
-                                <Input label="Additional Notes || Changable" name="additional" defaultValue={singleData.additionalNotes}></Input>
+                                <Input autoFocus label="Additional Notes || Changable" name="additional" defaultValue={singleData.additionalNotes}></Input>
                             </div>
 
                             <div className="grid grid-cols-1">
-                                <input className="btn btn-outline gro font-semibold hover:bg-[#212121]" type="submit" value={'Request'}/>
+                                <input className="btn btn-outline gro font-semibold hover:bg-[#212121] border-white border" type="submit" value={'Request'}/>
                             </div>
 
                         </form>

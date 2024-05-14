@@ -17,7 +17,7 @@ const Social = () => {
                         <FaTelegram className="text-3xl cursor-pointer"/>
                     </div>
                     <p className="gro mb-10 text-lg">Stay connected with us on social media to see how your support is making a difference in the fight against hunger! Follow us for updates, impact stories, and ways to get involved in our mission to provide nutritious meals to those in need. Together, we can make a positive change in our community. #FoodDonation #FightHunger #GiveBack</p>
-                    <Button className="w-full xl:w-auto">More About</Button>
+                    <Button className="w-full xl:w-auto border-white border">More About</Button>
                 </div>
             </div>
         </div>

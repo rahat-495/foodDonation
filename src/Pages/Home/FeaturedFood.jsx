@@ -14,7 +14,7 @@ const FeaturedFood = () => {
     })
 
     const getData = async () => {
-        const {data} = await axiosSecure.get(`http://localhost:5555/featuredFoods`) ;
+        const {data} = await axiosSecure.get(`/featuredFoods`) ;
         return data ;
     }
 
@@ -30,11 +30,11 @@ const FeaturedFood = () => {
                         </figure>
                       <div className="flex items-center gap-4">
                         <img className="w-10 h-10 border p-[1px] border-gray-700 rounded-full" src={food.donator.donatorImage} alt="" />
-                        <h1 className="gro text-xl text-black font-semibold">{food.donator.donatorName}</h1>
+                        <h1 className="gro text-xl font-semibold">{food.donator.donatorName}</h1>
                       </div>
                       <h2 className="card-title font-semibold gro">Recipe Name : {food.foodName}</h2>
 
-                      <p className="gro text-black ">{food.additionalNotes}</p>
+                      <p className="gro">{food.additionalNotes}</p>
 
                       <div className="flex items-center justify-between gap-3">
 
@@ -54,7 +54,7 @@ const FeaturedFood = () => {
 
                       <div className="card-actions w-full">
                         <Link className="w-full" to={`/featuredFoods/${food._id}`}>
-                            <Button className="w-full mt-2">View Details</Button>
+                            <Button className="w-full mt-2 border-white border">View Details</Button>
                         </Link>
                       </div>
 
@@ -65,7 +65,7 @@ const FeaturedFood = () => {
 
             <div className="flex items-center justify-center w-full mb-10">
                 <Link to={'/availableFoods'}>
-                    <Button>Show All</Button>
+                    <Button className="border-white border">Show All</Button>
                 </Link>
             </div>
 

@@ -12,17 +12,24 @@ const AvailableFoods = () => {
   const [sort , setSort] = useState('') ;
   const [search , setSearch] = useState('') ;
   const [layout , setLayout] = useState(true) ;
+  const [loading , setLoading] = useState(false) ;
   
   useEffect(() => {
-    axios.get(`http://localhost:5555/availbleFoods?sort=${sort}&search=${search}`)
+    setLoading(true) ;
+    axios.get(`https://assignment11server-omega.vercel.app/availbleFoods?sort=${sort}&search=${search}`)
     .then(res => {
       setAvailableFoods(res.data)
+      setLoading(false) ;
     })
   } , [sort , search])
 
   const handleSearch = (e) => {
     e.preventDefault() ;
     setSearch(e.target.search.value) ;
+  }
+
+  if(loading){
+    return <span className="loading min-h-[100vh] mx-auto min-w-[20%] flex items-center justify-center loading-ring loading-lg"></span>
   }
 
   return (
@@ -38,10 +45,10 @@ const AvailableFoods = () => {
 
       <div className="flex items-center justify-center gap-5 h-10 mb-20">
 
-        <Button onClick={() => setLayout(!layout)} className="py-[11px] hover:shadow-none">Change Layout</Button>
+        <Button onClick={() => setLayout(!layout)} className="py-[11px] border-white border hover:shadow-none">Change Layout</Button>
 
         <div className="">
-          <select onChange={(e) => setSort(e.target.value)} className="bg-[#232323] px-5 py-[9px] flex items-center justify-center rounded-md cursor-pointer text-white" name="sort" id="">
+          <select onChange={(e) => setSort(e.target.value)} className="bg-[#232323] border-white border px-5 py-[9px] flex items-center justify-center rounded-md cursor-pointer text-white" name="sort" id="">
             <option value="">Sort By Expire Date</option>
             <option value="asc">Ascending Order</option>
             <option value="dsc">Descending Order</option>
@@ -50,7 +57,7 @@ const AvailableFoods = () => {
 
         <div className="">
           <form className="mt-1" onSubmit={handleSearch}>
-            <div className="relative flex w-full max-w-[24rem]">
+            <div className="relative flex w-full max-w-[24rem] ">
               <Input
                 name="search"
                 type="text"
@@ -66,7 +73,7 @@ const AvailableFoods = () => {
         </div>
 
         <div className="mt-1">
-          <Button onClick={() => (setSort('') , setSearch(''))} className="flex items-center gap-3 py-3 hover:shadow-none">Reset <GrPowerReset className="text-lg"/></Button>
+          <Button onClick={() => (setSort('') , setSearch(''))} className="flex border-white border items-center gap-3 py-3 hover:shadow-none">Reset <GrPowerReset className="text-lg"/></Button>
         </div>
 
       </div>
@@ -88,7 +95,7 @@ const AvailableFoods = () => {
                   src={food.donator.donatorImage}
                   alt=""
                 />
-                <h1 className="gro text-xl text-black font-semibold">
+                <h1 className="gro text-xlfont-semibold">
                   {food.donator.donatorName}
                 </h1>
               </div>
@@ -96,7 +103,7 @@ const AvailableFoods = () => {
                 Recipe Name : {food.foodName}
               </h2>
 
-              <p className="gro text-black ">{food.additionalNotes}</p>
+              <p className="gro ">{food.additionalNotes}</p>
 
               <div className="flex items-center justify-between gap-3">
                 <div className="badge badge-outline px-2">
@@ -120,7 +127,7 @@ const AvailableFoods = () => {
 
               <div className="card-actions w-full">
                 <Link className="w-full" to={`/featuredFoods/${food._id}`}>
-                  <Button className="w-full mt-2">View Details</Button>
+                  <Button className="w-full mt-2 border-white border">View Details</Button>
                 </Link>
               </div>
             </div>
