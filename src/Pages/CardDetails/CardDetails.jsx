@@ -6,12 +6,14 @@ import UseAuth from "../../Hooks/UseAuth";
 import { ToastContainer, toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { useState } from "react";
 
 const CardDetails = () => {
 
     const {id} = useParams() ;
     const {user} = UseAuth() ;
     const axiosSecure = useAxiosSecure() ;
+    const [loading , setLoading] = useState(false) ;
 
     const date = new Date() ;
 
@@ -21,10 +23,12 @@ const CardDetails = () => {
     })
 
     const getData = async () => {
+        setLoading(true) ;
         const {data} = await axiosSecure.get(`/featuredFoods/${id}`) ;
+        setLoading(false) ;
         return data ;
     }
-
+    
     const {mutateAsync} = useMutation({
         mutationFn : async (obj) => {
             const {id , status , additional , email , requestedDate} = obj ;
@@ -72,6 +76,10 @@ const CardDetails = () => {
             modal.close() ;
         }
 
+    }
+
+    if(loading){
+        return <span className="loading min-h-[100vh] mx-auto min-w-[20%] flex items-center justify-center loading-ring loading-lg"></span> ;
     }
 
     return (
