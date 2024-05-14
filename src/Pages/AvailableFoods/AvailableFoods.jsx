@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { GrPowerReset } from "react-icons/gr";
 import { Helmet } from "react-helmet-async";
+import UseAuth from "../../Hooks/UseAuth";
 
 const AvailableFoods = () => {
   
@@ -12,14 +13,12 @@ const AvailableFoods = () => {
   const [sort , setSort] = useState('') ;
   const [search , setSearch] = useState('') ;
   const [layout , setLayout] = useState(true) ;
-  const [loading , setLoading] = useState(false) ;
+  const {loading} = UseAuth() ;
   
   useEffect(() => {
-    setLoading(true) ;
     axios.get(`https://assignment11server-omega.vercel.app/availbleFoods?sort=${sort}&search=${search}`)
     .then(res => {
       setAvailableFoods(res.data)
-      setLoading(false) ;
     })
   } , [sort , search])
 
@@ -29,7 +28,7 @@ const AvailableFoods = () => {
   }
 
   if(loading){
-    return <span className="loading min-h-[100vh] mx-auto min-w-[20%] flex items-center justify-center loading-ring loading-lg"></span>
+    return <span className="loading min-h-[100vh] mx-auto min-w-[20%] flex items-center justify-center loading-ring loading-lg"></span> ;
   }
 
   return (
