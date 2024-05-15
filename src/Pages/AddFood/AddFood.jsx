@@ -5,6 +5,8 @@ import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 import { Helmet } from "react-helmet-async";
 import { useEffect, useState } from "react";
+import Lottie from "lottie-react";
+import animation from '../../../public/loading.json' ;
 
 const AddFood = () => {
 
@@ -22,14 +24,10 @@ const AddFood = () => {
         })
     } , [])
 
-    if(loading || loading2){
-        console.log(data);
-        return <span className="loading min-h-[100vh] mx-auto min-w-[20%] flex items-center justify-center loading-ring loading-lg"></span> ;
-    }
-
+    
     const handleSubmit = (e) => {
         e.preventDefault() ;
-
+        
         const form = e.target ;
         const foodImage = form.foodImage.value ;
         const foodName = form.foodName.value ;
@@ -41,7 +39,7 @@ const AddFood = () => {
         const expiredDateTime = form.expire.value ;
         const additionalNotes = form.notes.value ;
         const status = form.status.value ;
-
+        
         const foodInfo = {
             foodImage ,
             foodName ,
@@ -67,6 +65,11 @@ const AddFood = () => {
         })
     }
 
+    if(loading || loading2){
+        console.log(data);
+        return <Lottie className="w-80 h-80 min-h-screen flex items-center justify-center relative left-1/2 -translate-x-1/2" animationData={animation} loop={true}/>;
+    }
+    
     return (
         <div className="min-h-[70vh] flex items-center flex-col justify-center mx-3">
 

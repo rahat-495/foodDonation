@@ -2,6 +2,8 @@
 import { useContext } from "react";
 import { AuthContext } from "../Auth/AuthProvider";
 import { Navigate, useLocation } from "react-router-dom";
+import Lottie from "lottie-react";
+import animation from '../../public/loading.json' ;
 
 const PrivateFile = ({children}) => {
 
@@ -9,7 +11,7 @@ const PrivateFile = ({children}) => {
     const location = useLocation() ;
 
     if(loading){
-        return <span className="loading min-h-[100vh] mx-auto min-w-[20%] flex items-center justify-center loading-ring loading-lg"></span>
+        return <Lottie className="w-80 h-80 min-h-screen flex items-center justify-center relative left-1/2 -translate-x-1/2" animationData={animation} loop={true}/>;
     }
 
     if(user){

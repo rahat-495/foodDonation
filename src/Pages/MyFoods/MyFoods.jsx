@@ -10,6 +10,8 @@ import { toast } from "react-toastify";
 import { Helmet } from "react-helmet-async";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useState } from "react";
+import Lottie from "lottie-react";
+import animation from '../../../public/loading.json' ;
 
 const MyFoods = () => {
 
@@ -64,7 +66,7 @@ const MyFoods = () => {
     }
 
     if(loading){
-      return <span className="loading min-h-[100vh] mx-auto min-w-[20%] flex items-center justify-center loading-ring loading-lg"></span> ;
+      return <Lottie className="w-80 h-80 min-h-screen flex items-center justify-center relative left-1/2 -translate-x-1/2" animationData={animation} loop={true}/>;
     }
     
   return (
