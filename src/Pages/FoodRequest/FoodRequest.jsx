@@ -53,7 +53,7 @@ const FoodRequest = () => {
             icon: "success"
           });
 
-          axiosSecure.patch(`http://localhost:5555/calcelRequest/${id}` , {email : '' , status : 'available'})
+          axiosSecure.patch(`/calcelRequest/${id}` , {email : '' , status : 'available'})
           .then((res) => {
             console.log(res.data);
             if(res.data.modifiedCount > 0){
