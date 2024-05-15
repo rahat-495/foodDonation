@@ -39,7 +39,7 @@ const FoodRequest = () => {
           
           <Helmet>
                 <title>
-                Feast Forward || My Requeste Foods
+                  Feast Forward || My Requested Foods
                 </title>
           </Helmet>
 
