@@ -10,3 +10,11 @@ Currently, two official plugins are available:
 --------------------------------------- live link ---------------------------------------
 
                         https://assignment-11-90835.web.app
+
+--------------------------------------- About Web-Site ---------------------------------------
+
+- User Authentication: Enable signup, login, and profile management using Firebase Authentication.
+- Donation Management: Create a dashboard for users to easily donate food items, with image uploads and location selection, managed using MongoDB.
+- Real-Time Updates: Utilize Realtime Database for instant updates on donation requests, deliveries, and available food items.
+- Interactive Social: Integrate social to show donation centers and areas in need, allowing users to find nearby locations or request pickups.
+- Social Sharing & Feedback: Enable users to share experiences on social media and implement a feedback system for rating and reviewing donors and recipients.
