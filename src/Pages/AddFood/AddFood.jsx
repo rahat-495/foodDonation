@@ -111,7 +111,7 @@ const AddFood = () => {
                 </div>
 
                 <div className="grid grid-cols-1 ">
-                    <input type="submit" value="Add Food" className="btn btn-outline gro font-semibold hover:bg-[#212121]"/>
+                    <input type="submit" value="Add Food" className="btn btn-outline gro font-semibold hover:text-gray-400 hover:bg-[#212121]"/>
                 </div>
 
             </form>
