@@ -38,11 +38,11 @@ const FeaturedFood = () => {
 
                       <div className="flex items-center justify-between gap-3">
 
-                        <div className="badge badge-outline xl:px-6 xl:h-auto">
+                        <div className="badge badge-outline h-8 px-[2px] py-1 xl:px-6 xl:py-0 xl:h-auto">
                             <p className="gro font-semibold">Quantity : {food.foodQuantity}</p>
                         </div>
 
-                        <div className="badge badge-outline xl:px-6 xl:h-auto">
+                        <div className="badge badge-outline h-8 px-[2px] py-1 xl:px-6 xl:py-0 xl:h-auto">
                             <p className="gro font-semibold">Expired : {food.expiredDateTime}</p>
                         </div>
 
