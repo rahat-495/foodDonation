@@ -14,6 +14,18 @@ const AvailableFoods = () => {
   const [search , setSearch] = useState('') ;
   const [layout , setLayout] = useState(true) ;
   const {loading} = UseAuth() ;
+  const [data , setDate] = useState([]) ;
+  const [loading2 , setLoading] = useState(false) ;
+
+  useEffect(() => {
+      setLoading(true) ;
+      axios.get(`https://assignment11server-omega.vercel.app/featuredFoods`)
+      .then(res => {
+          setDate(res.data) ;
+          setLoading(false) ;
+      })
+  } , [])
+  
   
   useEffect(() => {
     axios.get(`https://assignment11server-omega.vercel.app/availbleFoods?sort=${sort}&search=${search}`)
@@ -27,7 +39,8 @@ const AvailableFoods = () => {
     setSearch(e.target.search.value) ;
   }
 
-  if(loading){
+  if(loading || loading2){
+    console.log(data);
     return <span className="loading min-h-[100vh] mx-auto min-w-[20%] flex items-center justify-center loading-ring loading-lg"></span> ;
   }
 
