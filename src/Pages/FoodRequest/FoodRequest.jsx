@@ -1,10 +1,12 @@
 
 import { useQuery } from "@tanstack/react-query";
 import UseAuth from "../../Hooks/UseAuth";
-import { Card, Typography } from "@material-tailwind/react";
+import { Button, Card, Typography } from "@material-tailwind/react";
 import { Helmet } from "react-helmet-async";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import Swal from 'sweetalert2'
 
 const FoodRequest = () => {
 
@@ -12,7 +14,7 @@ const FoodRequest = () => {
     const axiosSecure = useAxiosSecure() ;
     const [loading , setLoading] = useState(false) ;
 
-    const { data: myRequestedFoods } = useQuery({
+    const { data: myRequestedFoods , refetch } = useQuery({
         queryKey: ["myRequestedFoods" , user.email],
         queryFn: () => getData(),
         initialData : [] ,
@@ -28,7 +30,40 @@ const FoodRequest = () => {
         return data;
     };
 
-    const TABLE_HEAD = ["Donar Name", "Pickup Location" ,"Expire Date" , "Request Date"];
+    const TABLE_HEAD = ["Donar Name", "Pickup Location" ,"Expire Date" , "Request Date" , ""];
+
+    const handleCancel = (id) => {
+
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to cancel this !",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it"
+      }).then((result) => {
+        if (result.isConfirmed) {
+
+          Swal.fire({
+            title: "Canceled",
+            text: "Your Request is Success Fully Cancel !",
+            icon: "success"
+          });
+
+          axiosSecure.patch(`http://localhost:5555/calcelRequest/${id}` , {email : '' , status : 'available'})
+          .then((res) => {
+            console.log(res.data);
+            if(res.data.modifiedCount > 0){
+              toast.success("Request Cancel Success Fully !") ;
+              refetch() ;
+            }
+          })
+
+        }
+      });
+
+    }
 
     if(loading){
       return <span className="loading min-h-[100vh] mx-auto min-w-[20%] flex items-center justify-center loading-ring loading-lg"></span> ;
@@ -85,12 +120,30 @@ const FoodRequest = () => {
                         {card.requestedDate}
                     </td>
 
+                    <td className="p-4">
+                      <Button onClick={() => handleCancel(card._id)}>Cancel Request</Button>
+                    </td>
+
                   </tr>
                 ))}
               </tbody>
             </table>
           </Card>
         </div>
+
+        <ToastContainer
+            position="top-center"
+            autoClose={800}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+        />
+
     </div>
     );
 };
